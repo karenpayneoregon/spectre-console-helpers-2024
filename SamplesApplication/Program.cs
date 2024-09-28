@@ -10,7 +10,7 @@ internal partial class Program
         //AnsiConsole.Record();
 
         var products = SpectreConsoleHelpers.GenericSelection(BogusOperations.Products());
-        if (products.Any())
+        if (products.Count >0)
         {
             foreach (var product in products)
             {
