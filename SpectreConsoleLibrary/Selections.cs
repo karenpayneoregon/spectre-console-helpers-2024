@@ -13,7 +13,7 @@ public partial class SpectreConsoleHelpers
         new MultiSelectionPrompt<string>()
             .PageSize(pageSize)
             .Required(false)
-            .Title($"[{_promptColor}]{title}[/]?")
+            .Title($"[{_promptColor}]{title}[/]")
             .InstructionsText("[grey](Press [yellow]<space>[/] to toggle a month, [yellow]<enter>[/] to accept)[/] or [red]Enter[/] w/o any selections to cancel")
             .AddChoices(CurrentInfo!.MonthNames[..^1])
             .HighlightStyle(new Style(Color.White, Color.Black, Decoration.Invert))
@@ -35,7 +35,7 @@ public partial class SpectreConsoleHelpers
             prompt: new MultiSelectionPrompt<T>()
                 .PageSize(10)
                 .Required(false)
-                .Title($"[{_promptColor}]{title}[/]?")
+                .Title($"[{_promptColor}]{title}[/]")
                 .InstructionsText("[grey](Press [yellow]<space>[/] to toggle an item, " +
                                   "[yellow]<enter>[/] to accept)[/] or [red]Enter[/] w/o " +
                                   "any selections to cancel")

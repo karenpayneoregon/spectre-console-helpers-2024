@@ -7,14 +7,21 @@ internal partial class Program
 {
     static void Main(string[] args)
     {
-        AnsiConsole.Record();
-        AnsiConsole.MarkupLine("[yellow]Hello[/]");
+        //AnsiConsole.Record();
 
-        var test = SpectreConsoleHelpers.GenericSelection(BogusOperations.Products());
-        foreach (var product in test)
+        var products = SpectreConsoleHelpers.GenericSelection(BogusOperations.Products());
+        if (products.Any())
         {
-            Console.WriteLine(product.ProductName);
+            foreach (var product in products)
+            {
+                AnsiConsole.MarkupLine($"[bold]Product Name:[/] [{Color.Aqua}]{product.ProductName}[/]");
+            }
         }
-        Console.ReadLine();
+        else
+        {
+            AnsiConsole.MarkupLine("[red]No products selected.[/]");
+        }
+
+        SpectreConsoleHelpers.ExitPrompt();
     }
 }
