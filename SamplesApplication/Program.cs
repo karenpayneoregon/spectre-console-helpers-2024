@@ -2,7 +2,8 @@
 using SamplesApplication.Classes;
 using SamplesApplication.Models;
 using SamplesApplication.Validators;
-using Spectre.Console.Json;
+using static SpectreConsoleLibrary.SpectreConsoleHelpers;
+
 using SpectreConsoleLibrary;
 
 using ValidationResult = FluentValidation.Results.ValidationResult;
@@ -19,12 +20,26 @@ internal partial class Program
         //ShowExceptionExample();
         //AddPersonExample();
         DisplayJsonExample();
-
-
         //GenericSelectionExample();
 
         //var html = AnsiConsole.ExportHtml();
-        SpectreConsoleHelpers.ExitPrompt();
+        ExitPrompt();
+    }
+
+    public static void GetSomeData()
+    {
+        string firstName = Console.ReadLine();
+        string lastName = Console.ReadLine();
+        string birthDate = Console.ReadLine();
+
+        if (DateOnly.TryParse(birthDate, out var bd))
+        {
+            // date is valid
+        }
+        else
+        {
+            // date is not valid
+        }
     }
 
     /// <summary>
@@ -79,6 +94,7 @@ internal partial class Program
             AnsiConsole.MarkupLine("[red]No data generated.[/]");
         }
     }
+
 
     private static async Task CreateRandomData()
     {
