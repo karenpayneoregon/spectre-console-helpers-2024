@@ -68,8 +68,8 @@ public class Product : INotifyPropertyChanged
     }
 
     public override string ToString() => ProductName;
-
-    public event PropertyChangedEventHandler? PropertyChanged;
+    public string Display => $"{ProductId,-3}{ProductName}";
+    public event PropertyChangedEventHandler PropertyChanged;
     protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null!)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

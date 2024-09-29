@@ -14,11 +14,11 @@ public partial class SpectreConsoleHelpers
     /// <summary>
     /// Prompts the user to enter their first name with an optional custom prompt text.
     /// </summary>
-    /// <param name="text">The custom text to display in the prompt. Defaults to "First name".</param>
+    /// <param name="prompt">The custom text to display in the prompt. Defaults to "First name".</param>
     /// <returns>The entered first name as a string. The input can be empty.</returns>
-    public static string GetFirstName(string text = "First name") =>
+    public static string GetFirstName(string prompt = "First name") =>
         AnsiConsole.Prompt(
-            new TextPrompt<string>($"[{_promptColor}]{text}[/]")
+            new TextPrompt<string>($"[{_promptColor}]{prompt}[/]")
                 .PromptStyle(_promptStyle)
                 .AllowEmpty()
         );
@@ -27,11 +27,11 @@ public partial class SpectreConsoleHelpers
     /// <summary>
     /// Prompts the user to enter their first name with an optional custom prompt text.
     /// </summary>
-    /// <param name="text">The custom text to display in the prompt. Defaults to "First name".</param>
+    /// <param name="prompt">The custom text to display in the prompt. Defaults to "First name".</param>
     /// <returns>The entered first name as a string. The input must have at least three characters.</returns>
-    public static string FirstName(string text = "First name") =>
+    public static string FirstName(string prompt = "First name") =>
         AnsiConsole.Prompt(
-            new TextPrompt<string>($"[{_promptColor}]{text}[/]")
+            new TextPrompt<string>($"[{_promptColor}]{prompt}[/]")
                 .PromptStyle(_promptStyle)
                 .Validate(value => value.Length switch
                 {
@@ -43,11 +43,11 @@ public partial class SpectreConsoleHelpers
     /// <summary>
     /// Prompts the user to enter their last name with an optional custom prompt text.
     /// </summary>
-    /// <param name="text">The custom text to display in the prompt. Defaults to "Last name".</param>
+    /// <param name="prompt">The custom text to display in the prompt. Defaults to "Last name".</param>
     /// <returns>The entered last name as a string. The input can be empty.</returns>
-    public static string GetLastName(string text = "Last name") =>
+    public static string GetLastName(string prompt = "Last name") =>
         AnsiConsole.Prompt(
-            new TextPrompt<string>($"[{_promptColor}]{text}[/]")
+            new TextPrompt<string>($"[{_promptColor}]{prompt}[/]")
                 .PromptStyle(_promptStyle)
                 .AllowEmpty()
         );
@@ -55,11 +55,11 @@ public partial class SpectreConsoleHelpers
     /// <summary>
     /// Prompts the user to enter their last name with an optional custom prompt text.
     /// </summary>
-    /// <param name="text">The custom text to display in the prompt. Defaults to "Last name".</param>
+    /// <param name="prompt">The custom text to display in the prompt. Defaults to "Last name".</param>
     /// <returns>The entered last name as a string. The input can be empty.</returns>
-    public static string LastName(string text = "Last name") =>
+    public static string LastName(string prompt = "Last name") =>
         AnsiConsole.Prompt(
-            new TextPrompt<string>($"[{_promptColor}]{text}[/]?")
+            new TextPrompt<string>($"[{_promptColor}]{prompt}[/]?")
                 .PromptStyle(_promptStyle)
                 .ValidationErrorMessage($"[{_errorForeGround} on {_errorBackGround}]Please enter your last name[/]"));
 
@@ -67,12 +67,12 @@ public partial class SpectreConsoleHelpers
     /// <summary>
     /// Prompts the user to enter their birthdate.
     /// </summary>
-    /// <param name="title">The title of the prompt displayed to the user. Defaults to "Enter your birthdate".</param>
+    /// <param name="prompt">The title of the prompt displayed to the user. Defaults to "Enter your birthdate".</param>
     /// <returns>
     /// The entered birthdate as a <see cref="DateOnly"/> object, or <c>null</c> if no date is entered.
     /// The year must be greater than 1900.
     /// </returns>
-    public static DateOnly? GetBirthDate(string title = "Enter your birth date")
+    public static DateOnly GetBirthDate(string prompt = "Enter your birth date")
     {
         /*
          * doubtful there is a birthday for the current person
@@ -81,7 +81,7 @@ public partial class SpectreConsoleHelpers
         const int minYear = 1900;
 
         return AnsiConsole.Prompt(
-            new TextPrompt<DateOnly>($"[{_promptColor}]{title}[/]:")
+            new TextPrompt<DateOnly>($"[{_promptColor}]{prompt}[/]:")
                 .PromptStyle(_promptStyle)
                 .ValidationErrorMessage($"[{_errorForeGround} on {_errorBackGround}]Please enter a valid date or press ENTER to not enter a date[/]")
                 .Validate(dt => dt.Year switch
@@ -114,14 +114,14 @@ public partial class SpectreConsoleHelpers
     /// <summary>
     /// Prompts the user to enter a new password.
     /// </summary>
-    /// <param name="title">The title of the prompt. Defaults to "Password".</param>
+    /// <param name="prompt">The title of the prompt. Defaults to "Password".</param>
     /// <returns>The entered password as a string.</returns>
     /// <remarks>
     /// The password input is hidden from display and validated against predefined rules.
     /// </remarks>
-    public static string GetNewPassword(string title = "Password") =>
+    public static string GetNewPassword(string prompt = "Password") =>
         AnsiConsole.Prompt(
-            new TextPrompt<string>($"[{_promptColor}]{title}[/]?")
+            new TextPrompt<string>($"[{_promptColor}]{prompt}[/]?")
                 .PromptStyle(_promptStyle)
                 .Secret()
                 .Validate(ValidatePassword)
@@ -145,7 +145,7 @@ public partial class SpectreConsoleHelpers
         {
             isValid = passwordValidator.TestAndScore(password);
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             isValid = false;
         }
@@ -158,12 +158,12 @@ public partial class SpectreConsoleHelpers
     /// <summary>
     /// Prompts the user to enter a password.
     /// </summary>
-    /// <param name="text">The prompt text to display to the user. Defaults to "Enter a password".</param>
+    /// <param name="prompt">The prompt text to display to the user. Defaults to "Enter a password".</param>
     /// <returns>The entered password as a string.</returns>
-    public static string GetPassword(string text = "Enter a password")
+    public static string GetPassword(string prompt = "Enter a password")
     {
         return AnsiConsole.Prompt(
-            new TextPrompt<string>($"[{_promptColor}]{text}[/]?")
+            new TextPrompt<string>($"[{_promptColor}]{prompt}[/]?")
                 .PromptStyle("grey50")
                 .Secret());
     }
@@ -172,11 +172,11 @@ public partial class SpectreConsoleHelpers
     /// <summary>
     /// Prompts the user to enter an integer value.
     /// </summary>
-    /// <param name="text">The prompt message to display to the user.</param>
+    /// <param name="prompt">The prompt message to display to the user.</param>
     /// <returns>The entered integer value.</returns>
-    public static int GetInt(string text) =>
+    public static int GetInt(string prompt) =>
         AnsiConsole.Prompt(
-            new TextPrompt<int>($"[{_promptColor}]{text}[/]")
+            new TextPrompt<int>($"[{_promptColor}]{prompt}[/]")
                 .PromptStyle(_promptStyle)
                 .DefaultValue(1)
                 .DefaultValueStyle(new(_promptColor, Color.Black, Decoration.None)));

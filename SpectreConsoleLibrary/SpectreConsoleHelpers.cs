@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using SpectreConsoleLibrary.Extensions;
 
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
 
@@ -29,7 +30,7 @@ public partial class SpectreConsoleHelpers
     }
     public static void PrintHeader([CallerMemberName] string? methodName = null)
     {
-        AnsiConsole.MarkupLine($"[yellow]{methodName}[/]");
+        AnsiConsole.MarkupLine($"[yellow]{methodName!.SplitCase()}[/]");
         Console.WriteLine();
     }
 
