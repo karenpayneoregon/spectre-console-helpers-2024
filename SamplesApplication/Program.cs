@@ -2,6 +2,7 @@
 using SamplesApplication.Classes;
 using SamplesApplication.Models;
 using SamplesApplication.Validators;
+using Spectre.Console.Json;
 using SpectreConsoleLibrary;
 
 using ValidationResult = FluentValidation.Results.ValidationResult;
@@ -14,9 +15,12 @@ internal partial class Program
     {
         //AnsiConsole.Record();
         await Task.Delay(0);
-        await AskQuestionExample();
-
+        //await AskQuestionExample();
+        //ShowExceptionExample();
         //AddPersonExample();
+        DisplayJsonExample();
+
+
         //GenericSelectionExample();
 
         //var html = AnsiConsole.ExportHtml();
@@ -124,4 +128,64 @@ internal partial class Program
             AnsiConsole.MarkupLine("[red]No products selected.[/]");
         }
     }
+
+    /// <summary>
+    /// Demonstrates handling and displaying an exception with custom formatting for showing an exception
+    /// colorized.
+    /// </summary>
+    /// <exception cref="InvalidOperationException">
+    /// Thrown when an invalid operation is attempted,
+    /// with an inner exception of type <see cref="ArgumentException"/>.
+    /// </exception>
+    public static void ShowExceptionExample()
+    {
+
+        AnsiConsole.Clear();
+        SpectreConsoleHelpers.PrintHeader();
+
+        try
+        {
+    
+            // Create the InvalidOperationException with the inner exception
+            throw new InvalidOperationException("Operation cannot be performed", 
+                new ArgumentException("Invalid argument"));
+        }
+        catch (Exception ex)
+        {
+            ex.ColorWithCyanFuchsia();
+        }
+    }
+
+    static void DisplayJsonExample()
+    {
+
+        AnsiConsole.Clear();
+        SpectreConsoleHelpers.PrintHeader();
+
+        SpectreConsoleHelpers.WriteOutJson(Json);
+
+    }
+
+    public static string Json =>
+        /*lang=json*/
+        """
+        [
+          {
+            "FirstName": "Jose",
+            "LastName": "Fernandez",
+            "BirthDate": "1985-01-01"
+          },
+          {
+            "FirstName": "Miguel",
+            "LastName": "Lopez",
+            "BirthDate": "1970-12-04"
+          },
+          {
+            "FirstName": "Angel",
+            "LastName": "Perez",
+            "BirthDate": "1980-09-11"
+          }
+        ]
+        """;
+
 }
