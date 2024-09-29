@@ -59,7 +59,7 @@ public partial class SpectreConsoleHelpers
     /// <returns>The entered last name as a string. The input can be empty.</returns>
     public static string LastName(string prompt = "Last name") =>
         AnsiConsole.Prompt(
-            new TextPrompt<string>($"[{_promptColor}]{prompt}[/]?")
+            new TextPrompt<string>($"[{_promptColor}]{prompt}[/]")
                 .PromptStyle(_promptStyle)
                 .ValidationErrorMessage($"[{_errorForeGround} on {_errorBackGround}]Please enter your last name[/]"));
 

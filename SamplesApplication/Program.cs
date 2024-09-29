@@ -2,6 +2,7 @@
 using SamplesApplication.Classes;
 using SamplesApplication.Models;
 using SamplesApplication.Validators;
+
 using static SpectreConsoleLibrary.SpectreConsoleHelpers;
 
 using SpectreConsoleLibrary;
@@ -12,18 +13,51 @@ namespace SamplesApplication;
 
 internal partial class Program
 {
+    /// <summary>
+    /// The entry point of the application.
+    /// </summary>
+    /// <remarks>
+    /// Use of SpectreConsoleHelpers in the code is not needed, here for the
+    /// reader to see the code path. This is done via using static SpectreConsoleLibrary.SpectreConsoleHelpers;
+    /// </remarks>
     static async Task Main(string[] args)
     {
+        
         //AnsiConsole.Record();
+        
         await Task.Delay(0);
+
+        //SpinnerSample();
         //await AskQuestionExample();
         //ShowExceptionExample();
-        //AddPersonExample();
-        DisplayJsonExample();
+        AddPersonExample();
+        //DisplayJsonExample();
         //GenericSelectionExample();
 
-        //var html = AnsiConsole.ExportHtml();
+        
+        //await File.WriteAllTextAsync("recorded.html", AnsiConsole.ExportHtml());
+        
         ExitPrompt();
+    }
+
+    private static void SpinnerSample()
+    {
+        AnsiConsole.Status()
+            .Start("Thinking...", ctx =>
+            {
+                // Simulate some work
+                AnsiConsole.MarkupLine("Doing some work...");
+                Thread.Sleep(1000);
+
+                // Update the status and spinner
+                ctx.Status("Thinking some more");
+                ctx.Spinner(Spinner.Known.Star);
+                ctx.SpinnerStyle(Style.Parse("green"));
+
+                // Simulate some work
+                AnsiConsole.MarkupLine("Doing some more work...");
+                Thread.Sleep(2000);
+            });
     }
 
     public static void GetSomeData()
