@@ -37,19 +37,19 @@ internal partial class Program
         var lastName = SpectreConsoleHelpers.LastName("Last name");
         var birthDate = SpectreConsoleHelpers.GetBirthDate("Birth date");
 
-        var person = new Person
+        Person person = new()
         {
             FirstName = firstName,
             LastName = lastName,
             BirthDate = birthDate
         };
 
-        PersonValidator validator = new PersonValidator();
+        PersonValidator validator = new();
         ValidationResult result = validator.Validate(person);
 
         if (result.IsValid)
         {
-            var operations = new DapperOperations();
+            DapperOperations operations = new();
             operations.Insert(person);
             AnsiConsole.MarkupLine("[bold][green]Person added successfully.[/][/]");
         }
